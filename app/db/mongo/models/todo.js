@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var TodoSchema = new mongoose.Schema({
+const TodoSchema = new mongoose.Schema({
 
   title: {
     type: String,

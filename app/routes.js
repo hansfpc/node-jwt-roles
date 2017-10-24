@@ -1,5 +1,5 @@
-var AuthenticationController = require('./controllers/authentication'),
-    TodoController = require('./controllers/todos'),
+var AuthenticationController = require('./db/mongo/controllers/auth'),
+    TodoController = require('./db/mongo/controllers/todos'),
     express = require('express'),
     passportService = require('../config/passport'),
     passport = require('passport');
@@ -33,4 +33,8 @@ module.exports = function(app){
   // Set up routes
   app.use('/api', apiRoutes);
 
-}
+  app.get('/', function (req, res) {
+    res.send('this shit is fucking working!');
+  });
+
+};
