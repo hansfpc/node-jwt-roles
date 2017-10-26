@@ -4,13 +4,14 @@ const authConfig = require('../../../../config/auth');
 
 function generateToken(user){
   return jwt.sign(user, authConfig.secret, {
-    expiresIn: 10080
+    expiresIn: "100d"
   });
 }
 
 function setUserInfo(request){
   return {
     _id: request._id,
+    name: request.name,
     email: request.email,
     role: request.role
   };
@@ -29,6 +30,7 @@ exports.login = function(req, res, next){
 
 exports.register = function(req, res, next){
 
+  let name = req.body.name;
   let email = req.body.email;
   let password = req.body.password;
   let role = req.body.role;
@@ -39,6 +41,10 @@ exports.register = function(req, res, next){
 
   if(!password){
     return res.status(422).send({error: 'You must enter a password'});
+  }
+
+  if(!name){
+    return res.status(422).send({error: 'You must enter a name'});
   }
 
   User.findOne({email: email}, function(err, existingUser){
@@ -52,6 +58,7 @@ exports.register = function(req, res, next){
     }
 
     let user = new User({
+      name: name,
       email: email,
       password: password,
       role: role

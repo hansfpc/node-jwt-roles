@@ -34,7 +34,7 @@ module.exports = function(app){
   app.use('/api', apiRoutes);
 
   app.get('/', function (req, res) {
-    res.send('this shit is fucking working!');
+    res.send('Home');
   });
 
 };
